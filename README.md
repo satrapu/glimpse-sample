@@ -5,6 +5,10 @@ Description
 -
 ASP.NET web application showing Glimpse in action.
 
+Live Application
+-
+http://glimpse-sample.apphb.com
+
 License
 -
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
