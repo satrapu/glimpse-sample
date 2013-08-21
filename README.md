@@ -1,9 +1,10 @@
-glimpse-sample
+Glimpse Sample
 ==============
 
 Description
 -
-ASP.NET web application showing Glimpse in action.
+ASP.NET web application showing Glimpse in action. 
+Configured addon: Glimpse ADO (using a SQLite database).
 
 Live Application
 -
