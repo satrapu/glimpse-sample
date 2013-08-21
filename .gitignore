@@ -164,6 +164,9 @@ UpgradeLog*.htm
 App_Data/*.mdf
 App_Data/*.ldf
 
+# SQLite files
+App_Data/*.sqlite
+
 #############
 ## Windows detritus
 #############
