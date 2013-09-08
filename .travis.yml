@@ -4,4 +4,4 @@ install:
   - sudo apt-get install mono-devel mono-gmcs
 
 script:
-  - mdtool build Travis-CI.xml
+  - xbuild GlimpseSample.sln
