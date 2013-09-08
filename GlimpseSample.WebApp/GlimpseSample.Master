@@ -20,10 +20,10 @@
             </li>
         </ul>
         <hr/>
+        <h2>
+            <asp:ContentPlaceHolder ID="PageTitle" runat="server" />
+        </h2>
         <form runat="server">
-            <h2>
-                <asp:ContentPlaceHolder ID="PageTitle" runat="server" />
-            </h2>
             <asp:ContentPlaceHolder ID="Content" runat="server" />
         </form>
     </body>
