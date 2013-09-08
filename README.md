@@ -5,7 +5,7 @@ Description
 -
 ASP.NET web application showing Glimpse in action. 
 <br/>
-The folowing extenions are included in this application:Support for the following extensions:
+The folowing extenions are included in this application:
 <ul>
   <li>
     ADO.NET (using a SQLite database) - since Aug 16th, 2013
