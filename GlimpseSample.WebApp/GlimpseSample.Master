@@ -6,8 +6,11 @@
     </head>
     <body>
         <h1>Welcome to the Glimpse Sample Application</h1>
-        <p>Click the links bellow to navigate to pages which show different Glimpse extensions in action</p>
-        <p>Make sure your Glimpse widget is opened at the appropriate tab</p>
+        <p>
+            Click the links bellow to navigate to pages which show different Glimpse extensions in action.
+            <br/>
+            Make sure your Glimpse widget is opened at the appropriate tab.
+        </p>
         <ul>
             <li>
                 <a href="AdoNet.aspx">ADO.NET</a> (SQL tab)
