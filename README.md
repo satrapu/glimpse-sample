@@ -4,13 +4,14 @@ Glimpse Sample
 Description
 -
 ASP.NET web application showing Glimpse in action. 
-Supported extensions:
+<br/>
+The folowing extenions are included in this application:Support for the following extensions:
 <ul>
   <li>
-    ADO.NET (using a SQLite database)
+    ADO.NET (using a SQLite database) - since Aug 16th, 2013
   </li>
   <li>
-    Log4Net
+    Log4Net - since Sep 08th, 2013
   </li>
 </ul>
 
