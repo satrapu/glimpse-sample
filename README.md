@@ -1,4 +1,4 @@
-Glimpse Sample
+Glimpse Sample [![Build Status](https://travis-ci.org/satrapu/glimpse-sample.png?branch=master)](https://travis-ci.org/satrapu/glimpse-sample)
 ==============
 
 Description
