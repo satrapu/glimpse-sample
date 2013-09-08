@@ -4,7 +4,9 @@ Glimpse Sample
 Description
 -
 ASP.NET web application showing Glimpse in action. 
-Configured addon: Glimpse ADO (using a SQLite database).
+Supported extensions
+# ADO.NET (using a SQLite database)
+# Log4Net
 
 Live Application
 -
