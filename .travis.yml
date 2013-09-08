@@ -4,4 +4,4 @@ install:
   - sudo apt-get install mono-devel mono-gmcs
 
 script:
-  - xbuild Travis-CI.xml
+  - mdtool build Travis-CI.xml
