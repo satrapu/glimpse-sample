@@ -6,6 +6,7 @@
         {
             public const string ConnectionString = "ConnectionString";
             public const string CommandTimeout = "CommandTimeout";
+            public const string Log4NetConfigFilePath = "Log4Net.ConfigFilePath";
         }
     }
 }

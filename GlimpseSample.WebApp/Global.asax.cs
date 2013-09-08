@@ -1,127 +1,38 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.Common;
-using System.Linq;
-using System.Transactions;
+using System.Diagnostics;
+using System.IO;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.Hosting;
+using log4net;
+using log4net.Config;
 
 namespace GlimpseSample.WebApp
 {
     public class Global : HttpApplication
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof (Global));
+
         public Global()
         {
             Error += OnError;
-            InitData();
+            InitLog4Net();
         }
 
-        private static void OnError(object sender, EventArgs e)
+        private void OnError(object sender, EventArgs e)
         {
+            Exception exception = Server.GetLastError();
+            string errorToken = Guid.NewGuid().ToString("N");
+            log.Error(string.Format("Encountered an unhandled application error. Associated error token is: {0}.", errorToken), exception);
         }
 
-        private static void InitData()
+        private static void InitLog4Net()
         {
-            string connectionStringName = WebConfigurationManager.AppSettings[Constants.AppSettings.ConnectionString];
-
-            if (string.IsNullOrWhiteSpace(connectionStringName))
-            {
-                throw new TypeInitializationException(typeof (Global).AssemblyQualifiedName,
-                        new ConfigurationErrorsException(string.Format("Missing value for application key: {0}", Constants.AppSettings.ConnectionString)));
-            }
-
-            ConnectionStringSettings connectionStringSettings = WebConfigurationManager.ConnectionStrings[connectionStringName];
-
-            if (string.IsNullOrWhiteSpace(connectionStringSettings.ProviderName))
-            {
-                throw new TypeInitializationException(typeof (Global).AssemblyQualifiedName,
-                        new ConfigurationErrorsException(
-                                string.Format("The connection string identified by name {0} does not define a provider name for a DbProviderFactory", connectionStringName)));
-            }
-
-            DbProviderFactory dbProviderFactory = DbProviderFactories.GetFactory(connectionStringSettings.ProviderName);
-
-            if (dbProviderFactory == null)
-            {
-                throw new TypeInitializationException(typeof (Global).AssemblyQualifiedName,
-                        new ConfigurationErrorsException(string.Format("Unable to instantiate A DbProviderFactory using provider name: {0}",
-                                connectionStringSettings.ProviderName)));
-            }
-
-            using (TransactionScope transactionScope = new TransactionScope())
-            {
-                using (DbConnection connection = dbProviderFactory.CreateConnection())
-                {
-                    if (connection == null)
-                    {
-                        throw new TypeInitializationException(typeof (Global).AssemblyQualifiedName, new InvalidOperationException("Unable to create connection"));
-                    }
-
-                    connection.ConnectionString = connectionStringSettings.ConnectionString;
-
-                    using (DbCommand command = connection.CreateCommand())
-                    {
-                        command.CommandText = "DROP TABLE IF EXISTS Users";
-                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.CommandTimeout]);
-                        command.CommandType = CommandType.Text;
-
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-
-                    using (DbCommand command = connection.CreateCommand())
-                    {
-                        command.CommandText = "CREATE TABLE Users(Id VARCHAR PRIMARY KEY ASC, Name VARCHAR NOT NULL)";
-                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.CommandTimeout]);
-                        command.CommandType = CommandType.Text;
-
-                        command.ExecuteNonQuery();
-                    }
-
-                    transactionScope.Complete();
-                }
-            }
-
-            using (TransactionScope transactionScope = new TransactionScope())
-            {
-                using (DbConnection connection = dbProviderFactory.CreateConnection())
-                {
-                    if (connection == null)
-                    {
-                        throw new TypeInitializationException(typeof (Global).AssemblyQualifiedName, new InvalidOperationException("Unable to create connection"));
-                    }
-
-                    connection.ConnectionString = connectionStringSettings.ConnectionString;
-                    connection.Open();
-
-                    using (DbCommand command = connection.CreateCommand())
-                    {
-                        command.CommandText = "INSERT INTO Users(Id, Name) VALUES (@Id, @Name)";
-                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.CommandTimeout]);
-                        command.CommandType = CommandType.Text;
-
-                        foreach (var index in Enumerable.Range(1, 100))
-                        {
-                            command.Parameters.Clear();
-
-                            DbParameter dbParameterId = command.CreateParameter();
-                            dbParameterId.ParameterName = "@Id";
-                            dbParameterId.Value = Guid.NewGuid().ToString("N");
-
-                            DbParameter dbParameterName = command.CreateParameter();
-                            dbParameterName.ParameterName = "@Name";
-                            dbParameterName.Value = "User#" + index;
-
-                            command.Parameters.Add(dbParameterId);
-                            command.Parameters.Add(dbParameterName);
-                            command.ExecuteNonQuery();
-                        }
-                    }
-
-                    transactionScope.Complete();
-                }
-            }
+            string log4NetConfigFilePath = WebConfigurationManager.AppSettings[Constants.AppSettings.Log4NetConfigFilePath];
+            string log4NetMappedConfigFilePath = HostingEnvironment.MapPath(log4NetConfigFilePath);
+            Debug.Assert(log4NetMappedConfigFilePath != null, "log4NetMappedConfigFilePath != null");
+            FileInfo log4NetFileInfo = new FileInfo(log4NetMappedConfigFilePath);
+            XmlConfigurator.ConfigureAndWatch(log4NetFileInfo);
         }
     }
 }

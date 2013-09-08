@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GlimpseSample.Master.cs" Inherits="GlimpseSample.WebApp.Master" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">  
+    <head runat="server">
+        <title>Glimpse Sample Application</title>
+    </head>
+    <body>
+        <h1>Welcome to the Glimpse Sample Application</h1>
+        <p>Click the links bellow to navigate to pages which show different Glimpse extensions in action</p>
+        <p>Make sure your Glimpse widget is opened at the appropriate tab</p>
+        <ul>
+            <li>
+                <a href="AdoNet.aspx">ADO.NET</a> (SQL tab)
+            </li>
+            <li>
+                <a href="Log4Net.aspx">Log4Net</a> (log4net tab)
+            </li>
+        </ul>
+        <hr/>
+        <form runat="server">
+            <h2>
+                <asp:ContentPlaceHolder ID="PageTitle" runat="server" />
+            </h2>
+            <asp:ContentPlaceHolder ID="Content" runat="server" />
+        </form>
+    </body>
+</html>
