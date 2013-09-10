@@ -2,10 +2,10 @@ language: c
 
 install:
   - sudo apt-get install mono-devel mono-gmcs
-  - sudo mozroots --import --machine --sync --ask-remove
-  - sudo yes | certmgr -ssl -m https://go.microsoft.com
-  - sudo yes | certmgr -ssl -m https://nugetgallery.blob.core.windows.net
-  - sudo yes | certmgr -ssl -m https://nuget.org
+  - sudo mozroots --import --sync --ask-remove
+  - sudo yes | certmgr -ssl https://go.microsoft.com
+  - sudo yes | certmgr -ssl https://nugetgallery.blob.core.windows.net
+  - sudo yes | certmgr -ssl https://nuget.org
 
 script:
   - xbuild GlimpseSample.sln
