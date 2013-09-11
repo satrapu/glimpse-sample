@@ -1,5 +1,8 @@
 language: c
 
+env:
+  EnablePackageRestore=true
+
 install:
   - sudo apt-get install mono-devel mono-gmcs
   - sudo mozroots --import --sync --ask-remove
