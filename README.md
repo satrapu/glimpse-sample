@@ -1,4 +1,4 @@
-Glimpse Sample [![Build Status](https://travis-ci.org/satrapu/glimpse-sample.png?branch=master)](https://travis-ci.org/satrapu/glimpse-sample)
+Glimpse Sample [![Build status](https://ci.appveyor.com/api/projects/status?id=hun9uu08vn108spr)](https://ci.appveyor.com/project/glimpse-sample)
 ==============
 
 Description
