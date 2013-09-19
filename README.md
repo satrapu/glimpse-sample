@@ -1,4 +1,4 @@
-Glimpse Sample [![Build status](https://ci.appveyor.com/api/projects/status?id=hun9uu08vn108spr)](https://ci.appveyor.com/project/glimpse-sample)
+Glimpse Sample <a href="http://teamcity.codebetter.com/viewType.html?buildTypeId=bt1094&tab=buildTypeStatusDiv&guest=1"><img src="http://teamcity.codebetter.com/app/rest/builds/buildType:(id:bt1094)/statusIcon"/></a>
 ==============
 
 Description
