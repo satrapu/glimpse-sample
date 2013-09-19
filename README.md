@@ -3,7 +3,7 @@ Glimpse Sample [![Build status](https://ci.appveyor.com/api/projects/status?id=h
 
 Description
 -
-ASP.NET web application showing Glimpse in action. 
+ASP.NET application showing Glimpse in action. 
 <br/>
 The folowing extenions are included in this application:
 <ul>
