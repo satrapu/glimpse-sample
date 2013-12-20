@@ -23,11 +23,11 @@ namespace GlimpseSample.WebApp
 
         private void PopulateUsers()
         {
-            string connectionStringName = WebConfigurationManager.AppSettings[Constants.AppSettings.ConnectionString];
+            string connectionStringName = WebConfigurationManager.AppSettings[Constants.AppSettings.CONNECTION_STRING];
 
             if (string.IsNullOrWhiteSpace(connectionStringName))
             {
-                throw new ConfigurationErrorsException(string.Format("Missing value for application key: {0}", Constants.AppSettings.ConnectionString));
+                throw new ConfigurationErrorsException(string.Format("Missing value for application key: {0}", Constants.AppSettings.CONNECTION_STRING));
             }
 
             ConnectionStringSettings connectionStringSettings = WebConfigurationManager.ConnectionStrings[connectionStringName];
@@ -46,9 +46,9 @@ namespace GlimpseSample.WebApp
                         connectionStringSettings.ProviderName));
             }
 
-            DataTable dataTableUsers = new DataTable();
+            var dataTableUsers = new DataTable();
 
-            using (TransactionScope transactionScope = new TransactionScope())
+            using (var transactionScope = new TransactionScope())
             {
                 using (DbConnection connection = dbProviderFactory.CreateConnection())
                 {
@@ -59,7 +59,7 @@ namespace GlimpseSample.WebApp
                     using (DbCommand command = connection.CreateCommand())
                     {
                         command.CommandText = "CREATE TABLE Users(Id INT PRIMARY KEY, Name VARCHAR NOT NULL)";
-                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.CommandTimeout]);
+                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.COMMAND_TIMEOUT]);
                         command.CommandType = CommandType.Text;
 
                         command.ExecuteNonQuery();
@@ -74,7 +74,7 @@ namespace GlimpseSample.WebApp
                         dbParameterName.ParameterName = "@Name";
 
                         command.CommandText = "INSERT INTO Users(Id, Name) VALUES (@Id, @Name)";
-                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.CommandTimeout]);
+                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.COMMAND_TIMEOUT]);
                         command.CommandType = CommandType.Text;
                         command.Parameters.Add(dbParameterId);
                         command.Parameters.Add(dbParameterName);
@@ -90,7 +90,7 @@ namespace GlimpseSample.WebApp
                     using (DbCommand command = connection.CreateCommand())
                     {
                         command.CommandText = "SELECT Id, Name FROM Users ORDER BY Id ASC";
-                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.CommandTimeout]);
+                        command.CommandTimeout = Convert.ToInt32(WebConfigurationManager.AppSettings[Constants.AppSettings.COMMAND_TIMEOUT]);
                         command.CommandType = CommandType.Text;
 
                         using (DbDataAdapter dataAdapter = dbProviderFactory.CreateDataAdapter())

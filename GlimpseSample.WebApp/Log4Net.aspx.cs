@@ -10,7 +10,7 @@ namespace GlimpseSample.WebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Exception sampleException = new Exception("Exception message", new Exception("Inner exception #1", new Exception("Inner exception #2")));
+            var sampleException = new Exception("Exception message", new Exception("Inner exception #1", new Exception("Inner exception #2")));
 
             log.Debug("Sample debug message");
             log.Info("Sample info message");

@@ -4,9 +4,9 @@
     {
         public static class AppSettings
         {
-            public const string ConnectionString = "ConnectionString";
-            public const string CommandTimeout = "CommandTimeout";
-            public const string Log4NetConfigFilePath = "Log4Net.ConfigFilePath";
+            public const string CONNECTION_STRING = "ConnectionString";
+            public const string COMMAND_TIMEOUT = "CommandTimeout";
+            public const string LOG4_NET_CONFIG_FILE_PATH = "Log4Net.ConfigFilePath";
         }
     }
 }

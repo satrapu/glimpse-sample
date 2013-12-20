@@ -28,10 +28,10 @@ namespace GlimpseSample.WebApp
 
         private static void InitLog4Net()
         {
-            string log4NetConfigFilePath = WebConfigurationManager.AppSettings[Constants.AppSettings.Log4NetConfigFilePath];
+            string log4NetConfigFilePath = WebConfigurationManager.AppSettings[Constants.AppSettings.LOG4_NET_CONFIG_FILE_PATH];
             string log4NetMappedConfigFilePath = HostingEnvironment.MapPath(log4NetConfigFilePath);
             Debug.Assert(log4NetMappedConfigFilePath != null, "log4NetMappedConfigFilePath != null");
-            FileInfo log4NetFileInfo = new FileInfo(log4NetMappedConfigFilePath);
+            var log4NetFileInfo = new FileInfo(log4NetMappedConfigFilePath);
             XmlConfigurator.ConfigureAndWatch(log4NetFileInfo);
         }
     }
