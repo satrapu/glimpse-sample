@@ -1,14 +1,2 @@
-language: c
-
-env:
-  EnablePackageRestore=true
-
-install:
-  - sudo apt-get install mono-devel mono-gmcs
-  - sudo mozroots --import --sync --ask-remove
-  - sudo yes | certmgr -ssl https://go.microsoft.com
-  - sudo yes | certmgr -ssl https://nugetgallery.blob.core.windows.net
-  - sudo yes | certmgr -ssl https://nuget.org
-
-script:
-  - xbuild GlimpseSample.sln
+language: csharp
+solution: GlimpseSample.sln
